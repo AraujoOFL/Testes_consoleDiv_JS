@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Exercício 4</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="ex1.html">Exercício 1</a></li>
+                <li><a href="ex2.html">Exercício 2</a></li>
+                <li><a href="ex3.html">Exercício 3</a></li>
+                <li><a href="ex4.html">Exercício 4</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p>Tabuleiro de xadrez: escreva um programa que crie uma string que represente uma grade 8 × 8, usando
+            caracteres de nova linha para separar linhas. Em cada posição da grade há “..” ou um caractere "#". Na
+            console.log deve mostrar algo como isto:<br>
+            ..#..#..#..#<br>
+            #..#..#..#..<br>
+            ..#..#..#..#<br>
+            #..#..#..#..<br>
+            ..#..#..#..#<br>
+            #..#..#..#..<br>
+            ..#..#..#..#<br>
+            #..#..#..#..</p>
+        <button onclick="criarTabuleiro()">Executar "Tabuleiro de xadrez"</button>
+        <div id="consoleOutput" style="top: 45%;
+            height: 380px;
+            width: 8%;
+            left: 46%;"></div>
+    </main>
+    <footer>
+        <p>Trabalho JavaScrpt - Exercícios de Loop</p>
+    </footer>
+
+    <script>
+
+        function criarTabuleiro() {
+            let tamanho = 8; // Tamanho da grade 8x8
+            let tabuleiro = ""; // String que representará o tabuleiro
+
+            for (let linha = 0; linha < tamanho; linha++) {
+                for (let coluna = 0; coluna < tamanho; coluna++) {
+                    if ((linha + coluna) % 2 === 0) {
+                        tabuleiro += ".."; // Adiciona ".." em posições pares
+                    } else {
+                        tabuleiro += "#"; // Adiciona "#" em posições ímpares
+                    }
+                }
+                tabuleiro += "\n"; // Nova linha ao fim de cada linha do tabuleiro
+            }
+
+            console.log(tabuleiro); // Exibe o tabuleiro no console
+            console.log(" "); // acresenta um espaçamento entre os tavuleiros
+        }
+
+        criarTabuleiro();
+
+        // a partir daqui é tudo CONSOLE OUTPUT
+
+        // Capturar a referência da div
+        const consoleDiv = document.getElementById('consoleOutput');
+
+        // Função para adicionar mensagens à div
+        function addMessageToDiv(message) {
+            const messageNode = document.createElement('div');
+            messageNode.textContent = message;
+            consoleDiv.appendChild(messageNode);
+        }
+
+        // Guardar o console original
+        const originalConsoleLog = console.log;
+        const originalConsoleError = console.error;
+        const originalConsoleWarn = console.warn;
+
+        // Sobrescrever o console.log
+        console.log = function (message) {
+            addMessageToDiv(message); // ("LOG: " + message);
+            originalConsoleLog.apply(console, arguments);
+        };
+
+        // Sobrescrever o console.error
+        console.error = function (message) {
+            addMessageToDiv("ERROR: " + message);
+            originalConsoleError.apply(console, arguments);
+        };
+
+        // Sobrescrever o console.warn
+        console.warn = function (message) {
+            addMessageToDiv("WARN: " + message);
+            originalConsoleWarn.apply(console, arguments);
+        };
+    </script>
+</body>
+<!--madeBy_AraujoOFL-->
+</html>

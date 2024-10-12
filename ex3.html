@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Exercício 3</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="ex1.html">Exercício 1</a></li>
+                <li><a href="ex2.html">Exercício 2</a></li>
+                <li><a href="ex3.html">Exercício 3</a></li>
+                <li><a href="ex4.html">Exercício 4</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p>"FizzBuzz: Escreva um programa que use console.log para imprimir todos os números de 1 a 100, com duas
+            exceções. Para números divisíveis por 3, imprima "Fizz" em vez do número e para números divisíveis por 5 (e
+            não 3), imprima "Buzz". Imprimir "FizzBuzz" para números divisíveis por 3 e 5."</p>
+        <button onclick="executarFizzBuzz()">Executar "FizzBuzz"</button>
+        <div id="consoleOutput"></div>
+    </main>
+    <footer>
+        <p>Trabalho JavaScrpt - Exercícios de Loop</p>
+    </footer>
+
+    <script>
+
+        function executarFizzBuzz() {
+            for (let i = 1; i <= 100; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    console.log("FizzBuzz");
+                } else if (i % 3 === 0) {
+                    console.log("Fizz");
+                } else if (i % 5 === 0) {
+                    console.log("Buzz");
+                } else {
+                    console.log(i);
+                }
+            }
+        }
+        // a partir daqui é tudo CONSOLE OUTPUT
+
+        // Capturar a referência da div
+        const consoleDiv = document.getElementById('consoleOutput');
+
+        // Função para adicionar mensagens à div
+        function addMessageToDiv(message) {
+            const messageNode = document.createElement('div');
+            messageNode.textContent = message;
+            consoleDiv.appendChild(messageNode);
+        }
+
+        // Guardar o console original
+        const originalConsoleLog = console.log;
+        const originalConsoleError = console.error;
+        const originalConsoleWarn = console.warn;
+
+        // Sobrescrever o console.log
+        console.log = function (message) {
+            addMessageToDiv(message); // ("LOG: " + message);
+            originalConsoleLog.apply(console, arguments);
+        };
+
+        // Sobrescrever o console.error
+        console.error = function (message) {
+            addMessageToDiv("ERROR: " + message);
+            originalConsoleError.apply(console, arguments);
+        };
+
+        // Sobrescrever o console.warn
+        console.warn = function (message) {
+            addMessageToDiv("WARN: " + message);
+            originalConsoleWarn.apply(console, arguments);
+        };
+    </script>
+</body>
+<!--madeBy_AraujoOFL-->
+</html>
